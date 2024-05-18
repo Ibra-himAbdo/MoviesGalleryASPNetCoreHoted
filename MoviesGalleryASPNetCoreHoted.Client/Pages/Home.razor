@@ -1,0 +1,28 @@
+﻿@page "/"
+@inject HttpClient _httpClient
+
+
+@if (movies != null)
+{
+    <MudGrid Spacing="2" Justify="Justify.FlexStart">
+        @foreach (var movie in movies)
+        {
+            <MudItem xs="3">
+                <DisplayCard Movie="@movie"></DisplayCard>
+                </MudItem>
+        }
+    </MudGrid>
+}
+else
+{
+    <div id="load" style="margin-right: 20%; margin-top: 20%; zoom:2;">
+        <div>G</div>
+        <div>N</div>
+        <div>I</div>
+        <div>D</div>
+        <div>A</div>
+        <div>O</div>
+        <div>L</div>
+    </div>
+}
+

@@ -1,0 +1,15 @@
+﻿@page "/DeleteMovie"
+@inject HttpClient _httpClient
+@inject ISnackbar Snackbar
+
+<MudItem xs="12" sm="6">
+    <MudAutocomplete T="string" Label="Search" @bind-Value="value" SearchFunc="@Search" />
+    <MudButton Class="mb-4 mt-4" OnClick=GetSelectedMovie Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Search" Color="Color.Primary">Search</MudButton>
+</MudItem>
+<MudItem xs="4" >
+@if (selectedMovie is not null)
+{
+    <DisplayCard Movie="@selectedMovie"></DisplayCard>
+        <MudButton Class="mt-4" OnClick="@(async () => await OnDelete())" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+}
+</MudItem>

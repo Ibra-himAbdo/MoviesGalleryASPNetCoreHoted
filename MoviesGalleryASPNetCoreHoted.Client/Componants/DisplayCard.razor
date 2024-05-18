@@ -1,0 +1,25 @@
+﻿<MudCard Class="overflow-x-hidden" Style="width: 100%">
+    <MudCardMedia Style="height: 400px;" Image="@($"data:image/jpg;base64,{Movie!.PosterURL}")" />
+    <MudCardContent>
+        <MudTooltip Text="@($"Plot: {Movie.Plot}\n")">
+            <MudText Typo="Typo.h5">@Movie.Title</MudText>
+                <MudText Typo="Typo.body2">Year: @Movie.Year</MudText>
+                <MudRating ReadOnly="true" Size="Size.Small" SelectedValue="@Convert.ToInt32(Movie.Rating)" />
+                <MudText Typo="Typo.body2">Director: @Movie.Director</MudText>
+                <MudText Typo="Typo.body2">Actors: @string.Join(",", Movie.Actors!)</MudText>
+                <MudText Typo="Typo.body2">Genre: @string.Join(",", Movie.Genre!)</MudText>
+                @* <MudText Typo="Typo.body2">Trailer: <MudElement HtmlTag="a" Class="ms-1"
+                                            Href="@Movie.Trailer!" target="blank"> @Movie.Title</MudElement>    
+                </MudText> *@
+                <MudCardActions>
+                    <MudIcon Icon="@Icons.Material.Filled.Info" aria-label="Info"></MudIcon>
+                </MudCardActions>
+            </MudTooltip>
+        </MudCardContent>
+    </MudCard>
+
+
+    @code {
+    [Parameter]
+    public GetMovieDto? Movie { get; set; }
+}

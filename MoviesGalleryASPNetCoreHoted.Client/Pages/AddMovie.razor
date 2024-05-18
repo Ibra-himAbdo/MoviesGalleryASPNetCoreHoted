@@ -1,0 +1,36 @@
+﻿@page "/AddMovie"
+
+@using MudBlazor
+@inject HttpClient _httpClient
+@inject ISnackbar Snackbar
+
+<MudCard >
+    <MudForm Model="@NewMovie" @ref="@form" ValidationDelay="0">
+        <MudCardContent>
+            <MudTextField @bind-Value="@NewMovie!.Title" 
+            For="@(() => NewMovie!.Title)" Immediate="true" Disabled ="@IsDisabled"
+            Required="true" RequiredError="Title is required!" Label="Title" />
+            <MudNumericField @bind-Value="@NewMovie!.Year"
+               For="@(() => NewMovie!.Year)" Immediate="true" Required="true" Disabled="@IsDisabled"
+            RequiredError="Year is required!" Label="Year" />
+            <MudTextField @bind-Value="@genre" For="@(() => genre)" Disabled="@IsDisabled"
+                Immediate="true" Required="true" RequiredError="Genre is required!" Label="Genre" />
+            <MudNumericField @bind-Value="@NewMovie!.Rating" For="@(() => NewMovie!.Rating)"
+               Immediate="true" Required="true" Disabled="@IsDisabled"
+                RequiredError="Rating is required!" Label="Rating" />
+            <MudTextField @bind-Value="@NewMovie!.Director"
+                          For="@(() => NewMovie!.Director)" Disabled="@IsDisabled"
+                Immediate="true" Required="true" RequiredError="Director is required!" Label="Director" />
+            <MudTextField @bind-Value="@actors" For="@(() => actors)" Immediate="true" Disabled="@IsDisabled"
+                Required="true" RequiredError="Actors is required!" Label="Actors" />
+            <MudTextField @bind-Value="@NewMovie!.Plot" For="@(() => NewMovie!.Plot)" Disabled="@IsDisabled"
+                Immediate="true" Required="true" RequiredError="Plot is required!" Label="Plot" />
+            <MudTextField @bind-Value="@NewMovie!.Trailer" For="@(() => NewMovie!.Trailer)" Disabled="@IsDisabled"
+                Immediate="true" Required="true" RequiredError="Trailer is required!" Label="Trailer" />
+            <InputFile OnChange="OnInputFileChange" disabled="@IsDisabled" required accept=".jpg" style="padding: 10px; margin: 10px ; border: 2px dashed" />
+        </MudCardContent>
+    </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Outlined" Disabled="@IsDisabled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await Submit())">Submit</MudButton>
+    </MudCardActions>
+</MudCard>

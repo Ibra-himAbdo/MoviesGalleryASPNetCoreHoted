@@ -1,0 +1,6 @@
+@MoviesGalleryASPNetCoreHoted.Server_HostAddress = http://localhost:5190
+
+GET {{MoviesGalleryASPNetCoreHoted.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

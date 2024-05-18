@@ -1,0 +1,37 @@
+﻿@page "/EditMovie"
+
+@inject HttpClient _httpClient
+@inject ISnackbar Snackbar
+
+<MudGrid>
+    <MudItem xs="12" sm="6">
+        <MudAutocomplete T="string" Label="Search" @bind-Value="value" SearchFunc="@Search" />
+        <MudButton Class="mb-4 mt-4" OnClick=MapUpdateMovieDto Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Search" Color="Color.Primary">Search</MudButton>
+        <MudCard>
+            <MudForm Model="@UpdateMovie" @ref="@form" ValidationDelay="0">
+                <MudCardContent>
+                    <MudTextField Disabled="@IsDisabled" @bind-Value="@UpdateMovie!.Title" For="@(() => UpdateMovie!.Title)" Immediate="true" Required="true" RequiredError="Title is required!" Label="Title" />
+                    <MudNumericField Disabled="@IsDisabled" @bind-Value="@UpdateMovie!.Year" For="@(() => UpdateMovie!.Year)" Immediate="true" Required="true" RequiredError="Year is required!" Label="Year" />
+                    <MudTextField Disabled="@IsDisabled" @bind-Value="@genre" For="@(() => genre)" Immediate="true" Required="true" RequiredError="Genre is required!" Label="Genre" />
+                    <MudNumericField Disabled ="@IsDisabled" @bind-Value="@UpdateMovie!.Rating" For="@(() => UpdateMovie!.Rating)" Immediate="true" Required="true" RequiredError="Rating is required!" Label="Rating" />
+                    <MudTextField Disabled ="@IsDisabled" @bind-Value="@UpdateMovie!.Director" For="@(() => UpdateMovie!.Director)" Immediate="true" Required="true" RequiredError="Director is required!" Label="Director" />
+                    <MudTextField Disabled="@IsDisabled" @bind-Value="@actors" For="@(() => actors)" Immediate="true" Required="true" RequiredError="Actors is required!" Label="Actors" />
+                    <MudTextField Disabled ="@IsDisabled" @bind-Value="@UpdateMovie!.Plot" For="@(() => UpdateMovie!.Plot)" Immediate="true" Required="true" RequiredError="Plot is required!" Label="Plot" />
+                    <MudTextField Disabled="@IsDisabled" @bind-Value="@UpdateMovie!.Trailer" For="@(() => UpdateMovie!.Trailer)" Immediate="true" Required="true" RequiredError="Trailer is required!" Label="Trailer" />
+                    <InputFile disabled="@IsDisabled" OnChange="OnInputFileChange" required accept=".jpg" style="padding: 10px; margin: 10px ; border: 2px dashed" />
+                </MudCardContent>
+            </MudForm>
+            <MudCardActions>
+                <MudButton Disabled="@IsDisabled" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Save" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await Submit())">Submit</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    
+    <MudItem xs="4" Class="mr-15 mt-30">
+    @if(@UpdateMovie != null)
+    {    
+       <DisplayCard Movie="@(movies.FirstOrDefault(x => x.Id == @UpdateMovie.Id))"></DisplayCard>
+    }
+    </MudItem>
+</MudGrid>
+
